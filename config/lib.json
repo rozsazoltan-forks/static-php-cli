@@ -109,8 +109,7 @@
             "krb5"
         ],
         "lib-suggests-windows": [
-            "brotli",
-            "zstd"
+            "brotli"
         ],
         "frameworks": [
             "CoreFoundation",
