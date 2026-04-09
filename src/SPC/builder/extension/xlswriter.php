@@ -5,9 +5,9 @@ declare(strict_types=1);
 namespace SPC\builder\extension;
 
 use SPC\builder\Extension;
-use SPC\store\FileSystem;
 use SPC\store\SourcePatcher;
 use SPC\util\CustomExt;
+use SPC\util\GlobalEnvManager;
 
 #[CustomExt('xlswriter')]
 class xlswriter extends Extension
@@ -30,14 +30,9 @@ class xlswriter extends Extension
     {
         $patched = parent::patchBeforeMake();
 
-        // Fix K&R C function declaration in bundled minizip rejected by modern Clang (C23 default)
-        $mztools = $this->source_dir . '/library/libxlsxwriter/third_party/minizip/mztools.c';
-        if (file_exists($mztools)) {
-            FileSystem::replaceFileStr(
-                $mztools,
-                "extern int ZEXPORT unzRepair(file, fileOut, fileOutTmp, nRecovered, bytesRecovered)\nconst char* file;\nconst char* fileOut;\nconst char* fileOutTmp;\nuLong* nRecovered;\nuLong* bytesRecovered;\n{",
-                "extern int ZEXPORT unzRepair(const char* file, const char* fileOut, const char* fileOutTmp, uLong* nRecovered, uLong* bytesRecovered)\n{"
-            );
+        // Bundled minizip uses K&R C function declarations rejected by C23 (default on macOS with Xcode 16+)
+        if (PHP_OS_FAMILY !== 'Windows') {
+            GlobalEnvManager::putenv('SPC_CMD_VAR_PHP_MAKE_EXTRA_CFLAGS=' . getenv('SPC_CMD_VAR_PHP_MAKE_EXTRA_CFLAGS') . ' -std=gnu17');
             $patched = true;
         }
 
@@ -52,5 +47,10 @@ class xlswriter extends Extension
             return true;
         }
         return $patched;
+    }
+
+    protected function getExtraEnv(): array
+    {
+        return ['CFLAGS' => '-std=gnu17'];
     }
 }
