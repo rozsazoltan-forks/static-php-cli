@@ -13,6 +13,7 @@ trait krb5
     {
         $origin_source_dir = $this->source_dir;
         $this->source_dir .= '/src';
+        shell()->cd($this->source_dir)->exec('ls -lah');
         if (!file_exists($this->source_dir . '/configure')) {
             shell()->cd($this->source_dir)->exec('autoreconf -if');
         }
