@@ -84,6 +84,16 @@
             "path": "COPYING"
         }
     },
+    "ext-decimal": {
+        "type": "ghtagtar",
+        "repo": "php-decimal/ext-decimal",
+        "match": "v2\\.\\d.*",
+        "path": "php-src/ext/decimal",
+        "license": {
+            "type": "file",
+            "path": "LICENSE"
+        }
+    },
     "deepclone": {
         "type": "ghtagtar",
         "repo": "symfony/php-ext-deepclone",
@@ -688,6 +698,14 @@
         "license": {
             "type": "file",
             "path": "LICENSE"
+        }
+    },
+    "libmpdec": {
+        "type": "url",
+        "url": "https://www.bytereef.org/software/mpdecimal/releases/mpdecimal-4.0.1.tar.gz",
+        "license": {
+            "type": "file",
+            "path": "COPYRIGHT.txt"
         }
     },
     "libmemcached": {
