@@ -74,6 +74,11 @@
             "qdbm"
         ]
     },
+    "deepclone": {
+        "type": "external",
+        "source": "deepclone",
+        "arg-type": "enable"
+    },
     "dio": {
         "support": {
             "BSD": "wip"
