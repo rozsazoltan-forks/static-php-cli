@@ -81,6 +81,7 @@
         "lib-depends": [
             "libmpdec"
         ]
+    },
     "deepclone": {
         "type": "external",
         "source": "deepclone",
