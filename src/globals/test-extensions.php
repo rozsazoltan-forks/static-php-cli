@@ -31,7 +31,7 @@ $test_os = [
     // 'ubuntu-22.04-arm', // bin/spc-gnu-docker for arm64
     // 'ubuntu-24.04-arm', // bin/spc for arm64
     'windows-2022', // .\bin\spc.ps1
-    'windows-2025',
+    // 'windows-2025',
 ];
 
 // whether enable thread safe
@@ -46,12 +46,12 @@ $upx = false;
 $frankenphp = false;
 
 // prefer downloading pre-built packages to speed up the build process
-$prefer_pre_built = false;
+$prefer_pre_built = true;
 
 // If you want to test your added extensions and libs, add below (comma separated, example `bcmath,openssl`).
 $extensions = match (PHP_OS_FAMILY) {
     'Linux', 'Darwin' => 'decimal',
-    'Windows' => 'decimal',
+    'Windows' => 'bcmath,brotli,bz2,ctype,curl,dom,exif,fileinfo,filter,ftp,gd,iconv,intl,mbregex,mbstring,mysqli,mysqlnd,opcache,openssl,pdo,pdo_mysql,pdo_pgsql,pgsql,session,simdjson,simplexml,sodium,sqlite3,tokenizer,xml,xmlreader,xmlwriter,zip,zlib',
 };
 
 // If you want to test shared extensions, add them below (comma separated, example `bcmath,openssl`).
