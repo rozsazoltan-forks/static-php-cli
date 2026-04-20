@@ -14,7 +14,7 @@ trait libde265
             ->addConfigureArgs(
                 '-DENABLE_SDL=OFF',
                 '-DENABLE_DECODER=OFF',
-                '-DHAVE_ARM=OFF',
+                '-DHAVE_NEON=OFF',
             )
             ->build();
         $this->patchPkgconfPrefix(['libde265.pc']);
